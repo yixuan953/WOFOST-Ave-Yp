@@ -17,7 +17,7 @@ int main(int argc, char **argv)
     Weather *head;           // 声明一个指向Weather类型的指针，可能用于链表的头指针，用来存储天气数据。
     Green *wipe;             // 声明一个指向Green类型的指针，Green可能是一个用户定义的数据类型。
 
-    int CycleLength = 300; // 声明一个整型变量CycleLength并初始化为300，可能表示一个周期的长度。
+    int CycleLength = 200; // 声明一个整型变量CycleLength并初始化为300，可能表示一个周期的长度。
     int NumberOfFiles;     // 声明一个整型变量NumberOfFiles，可能用来存储文件的数量。
     int Emergence;         // 声明一个整型变量Emergence，其具体用途不明。
     int i;                 // 声明一个整型变量i，通常用作循环计数。
@@ -124,7 +124,7 @@ int main(int argc, char **argv)
         {
             for (Lat = 0; Lat < Meteo->nlat; Lat++)
             {
-                if (Mask[Lon][Lat] != 1) // 如果Mask对应的位置不为1，则跳过当前循环
+                if (Mask[Lon][Lat] <= 250.0) // 如果Mask对应的位置不为1，则跳过当前循环
                 {
                     continue;
                 }
@@ -222,7 +222,7 @@ int main(int argc, char **argv)
                                     IntegrationWatBal();
                                     IntegrationNutrients();
 
-                                    Output(files[Grid->file]);
+                                    // Output(files[Grid->file]);
 
                                     /* Update the number of days that the crop has grown*/ /* 更新作物已经生长的天数 */
                                     Crop->GrowthDay++;
@@ -231,12 +231,12 @@ int main(int argc, char **argv)
                                 else
                                 {
                                     /* Write to the output files */ /* 写入输出文件 */
-                                    //Grid->twso[Crop->GrowthDay] = Crop->st.storage;
-                                    //Grid->length[Crop->GrowthDay] = Crop->GrowthDay;
-                                    //if (Meteo->Seasons == Crop->Seasons)
-                                    //{
-                                    //    Output(files[Grid->file]);
-                                    //}
+                                    Grid->twso[Crop->GrowthDay] = Crop->st.storage;
+                                    Grid->length[Crop->GrowthDay] = Crop->GrowthDay;
+                                    if (Meteo->Seasons == Crop->Seasons)
+                                    {
+                                        Output(files[Grid->file]);
+                                    }
 
                                     /* Clean the LeaveProperties */ /* 清理LeaveProperties */
                                     while (Crop->LeaveProperties != NULL)

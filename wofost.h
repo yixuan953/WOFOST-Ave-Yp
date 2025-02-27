@@ -450,7 +450,7 @@ int MeteoYear[METEO_LENGTH];
 int MeteoDay[METEO_LENGTH];
 float CO2;
 double Longitude[DOMAIN_LENGTH], Latitude[DOMAIN_LENGTH];
-int **Mask;
+float **Mask;
 float **Altitude;
 float **AngstA;
 float **AngstB;

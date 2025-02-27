@@ -5,50 +5,94 @@
 
 void header(FILE *fp)
 {
-    fprintf(fp,"Lat,Lon,Year,Day,Storage,N_residue_uptake,P_residue_uptake,Rain,Inf,Perc,Trans,Loss,Runoff,RM,N_uptake,P_uptake,N_demand,P_demand,N_avil,P_avail\n");
+    fprintf(fp,"Lat,Lon,SowingDay,GrowingDays,TSM1,TSM2,Avg,Adev,Stdev,Var,Skew,Curt,Seasons\n");
+    //fprintf(fp,"Lat,Lon,Sowing,Length,WLV,LAI,Avg,Adev,Stdev,Var,Skew,Curt\n");
 }
 
-void Output(FILE *fp)
-{      
-         fprintf(fp,"%7.2f\t%7.2f\t%4d\t%3d" // Lat, Lon, MeteoYear, MeteoDay
-                "\t%4.2f\t%4.2f\t%4.2f" // Crop stage
-                "\t%4.2f\t%4.2f\t%4.2f\t%4.2f\t%4.2f\t%4.2f\t%4.2f" // Water balance
-                "\t%4.2f\t%4.2f\t%4.2f\t%4.2f" //N,P uptake and demand
-                "\t%4.2f\t%4.2f\n", //Site conditions
-               Latitude[Lat],
-               Longitude[Lon],
-               MeteoYear[Day],
-               MeteoDay[Day],
-        //Crop->st.Development,
-        //Crop->st.leaves,
-        //Crop->st.stems,
-               Crop->st.storage,
-               Crop->N_rt.Uptake_lv + Crop->N_rt.Uptake_st + Crop->N_rt.Uptake_ro,
-               Crop->P_rt.Uptake_lv + Crop->P_rt.Uptake_st + Crop->P_rt.Uptake_ro, 
-        //Crop->st.roots,
-        //Crop->st.LAI,
-               Rain[Lon][Lat][Day],
-               // WatBal->WaterStress,
-               // WatBal->st.Moisture,
-               WatBal->rt.Infiltration,
-               WatBal->rt.Percolation,
-               WatBal->rt.Transpiration,
-               WatBal->rt.Loss,
-               WatBal->rt.Runoff,
-               WatBal->st.RootZoneMoisture,
+void Output(FILE *fp ) 
+{
+    float ave, adev, sdev, var, skew, curt, lngth;
+    int mnth, dy, dekad, i;
+    
+    sscanf(Grid->start,"%2d-%2d",&mnth,&dy);
+   
+    if (mnth < 1 || mnth > 12) exit(0);
+    if (dy < 1 || dy >31) exit (0);
+     
+    // convert sowing day to dekad
+    dekad = (mnth -1) * 3;
+    if (dy <= 10)
+        dekad += 1;
+    else if(dy <=20)
+        dekad += 2;
+    else
+        dekad += 3;   
+                  
+    
+    if (Crop->Seasons > 2) {
+        lngth =0;
+        for (i= 1; i <= Crop->Seasons; i++) {
+            lngth = lngth + Grid->length[i];
+    }
+       
+        lngth = lngth/Crop->Seasons;
+               
+        Moment(Grid->twso, Crop->Seasons, &ave, &adev, &sdev, &var, &skew, &curt);  
+       
+        fprintf(fp, "%4.2f, %4.2f, %6d, %6.0f, %4.0f, %4.0f, %6.0f, %6.0f, %6.0f, %9.0f, %5.2f, %5.2f %5d\n", 
+        Latitude[Lat], 
+        Longitude[Lon], 
+        dekad,   //dekad sowing
+        lngth,
+        Crop->prm.TempSum1,
+        Crop->prm.TempSum2,
+        ave,
+        adev,
+        sdev,
+        var,
+        skew,
+        curt,
+        Crop->Seasons);
+    }
+ }
+
+
+// void header(FILE *fp)
+// {
+//    fprintf(fp,"Date,Date,DVS,WLV,WST,WSO,WRT,LAI,WSTRESS,SOILM,INF,Rain,NNI,PNI,KNI,NPKI\n");
+// }
+
+
+// void Output(FILE *fp)
+// {    
+//    fprintf(fp,"%7.2f\t%7.2f\t\t%4d\t\t%3d\t\t%4.2f\t%4.2f\t%4.2f\t%4.2f\t%4.2f\t%4.2f\t\t%4.2f\t%4.2f\t%4.2f\t%4.2f\t%4.2f\t%4.2f\t"
+//            "\t%4.2f\t%4.2f\t%4.2f\t%4.2f\t%4.2f\t%4.2f\t%4.2f\t%4.2f\t%4.2f\t%4.2f\t%4.2f\t%4.2f\n",
+//        Latitude[Lat],
+//        Longitude[Lon],
+//        MeteoYear[Day],
+//        MeteoDay[Day],
+//        Crop->st.Development,
+//        Crop->st.leaves,
+//        Crop->st.stems,
+//        Crop->st.storage,
+//        Crop->st.roots,
+//        Crop->st.LAI,
+//        WatBal->WaterStress,
+//        WatBal->st.Moisture,
+//        Rain[Lon][Lat][Day],
+//        WatBal->rt.Infiltration,
+//        WatBal->rt.Runoff,
+//        WatBal->rt.Loss,
 //        Crop->N_st.Indx,
 //        Crop->P_st.Indx,
 //        Crop->K_st.Indx,
 //        Site->st_N_tot,
 //        Site->st_P_tot,
 //        Site->st_K_tot,
-               Crop->N_rt.Uptake,
-               Crop->P_rt.Uptake,
+//        Crop->N_rt.Uptake,
+//        Crop->P_rt.Uptake,
 //        Crop->K_rt.Uptake,
-               Crop->N_rt.Demand_lv + Crop->N_rt.Demand_st + Crop->N_rt.Demand_ro,
-               Crop->P_rt.Demand_lv + Crop->P_rt.Demand_st + Crop->P_rt.Demand_ro,
+//        Crop->N_rt.Demand_lv + Crop->N_rt.Demand_st + Crop->N_rt.Demand_ro,
+//        Crop->P_rt.Demand_lv + Crop->P_rt.Demand_st + Crop->P_rt.Demand_ro,
 //        Crop->K_rt.Demand_lv + Crop->K_rt.Demand_st + Crop->K_rt.Demand_ro);
-
-               Site->st_N_tot,
-               Site->st_P_tot);
-}
+// }
