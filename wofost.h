@@ -412,8 +412,8 @@ typedef struct SIMUNIT {
         char output[MAX_STRING];
         
         /* Statistics */
-        float twso[100000];
-        float length[100000];
+        float twso[1000000];
+        float length[10000000];
                 
         struct SIMUNIT *next;
         } SimUnit; 
