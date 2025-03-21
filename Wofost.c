@@ -231,7 +231,7 @@ int main(int argc, char **argv)
                                     /* Write to the output files */ /* 写入输出文件 */
                                     Grid->twso[Crop->Seasons] = Crop->st.storage;
                                     Grid->length[Crop->Seasons] = Crop->GrowthDay;
-                                    printf("%5.2f %5.2f\n", Grid->twso[Crop->GrowthDay], Grid->length[Crop->GrowthDay]);
+                                    //printf("%5.2f %5.2f\n", Grid->twso[Crop->GrowthDay], Grid->length[Crop->GrowthDay]);
                                     
                                     if (Meteo->Seasons == Crop->Seasons)
                                     {

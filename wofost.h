@@ -15,7 +15,7 @@
 #define NUMBER_OF_TABLES        31
 #define MAX_STRING             2048
 #define METEO_LENGTH           36600 //max 100 years 
-#define DOMAIN_LENGTH          15000   //max 0.5 degree
+#define DOMAIN_LENGTH          15000 //max 0.5 degree
 
 struct tm current_date;
 

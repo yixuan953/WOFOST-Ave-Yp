@@ -1,0 +1,7 @@
+/lustre/nobackup/WUR/ESG/zhou111/Data/Climate_Forcing/WFDE5/Indus/ 1985 2019 30 /lustre/nobackup/WUR/ESG/zhou111/Data/Crop_Mask/CaseStudy/Indus/Indus_secondrice_mask.nc
+Indus_Tmin_daily_1985-2019.nc  TMIN tasmin
+Indus_Tmax_daily_1985-2019.nc  TMAX tasmax
+Indus_SWdown_daily_1985-2019.nc  RADIATION SWdown
+Indus_Prec_daily_1985-2019.nc  RAIN Prec
+Indus_Wind_daily_1985-2019.nc  WINDSPEED Wind
+Indus_Vap_daily_1985-2019.nc  VAPOUR Vapour

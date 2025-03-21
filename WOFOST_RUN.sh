@@ -20,4 +20,10 @@ module load netcdf
 # ./wofost-Ave-Yp list_Yangtze_secondrice_Yp.txt meteolist_WFDE5_Yangtze_secondrice.txt 
 # ./wofost-Ave-Yp list_Yangtze_maize_Yp.txt meteolist_WFDE5_Yangtze_maize.txt 
 # ./wofost-Ave-Yp list_Yangtze_winterwheat_Yp.txt meteolist_WFDE5_Yangtze_winterwheat.txt 
-./wofost-Ave-Yp list_Yangtze_soybean_Yp.txt meteolist_WFDE5_Yangtze_soybean.txt 
+# ./wofost-Ave-Yp list_Yangtze_soybean_Yp.txt meteolist_WFDE5_Yangtze_soybean.txt 
+
+# ./wofost-Ave-Yp list_Rhine_maize_Yp.txt meteolist_WFDE5_Rhine_maize.txt 
+./wofost-Ave-Yp list_Indus_maize_Yp.txt meteolist_WFDE5_Indus_maize.txt 
+./wofost-Ave-Yp list_LaPlata_maize_Yp.txt meteolist_WFDE5_LaPlata_maize.txt 
+
+# ./wofost-Ave-Yp list_Rhine_winterwheat_Yp.txt meteolist_WFDE5_Rhine_winterwheat.txt 

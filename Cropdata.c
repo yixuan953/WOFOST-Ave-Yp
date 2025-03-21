@@ -42,6 +42,7 @@ void GetCropData(Plant *CROP, char *cropfile)
             {
                 while ((c=fgetc(fq)) !='=');
                 fscanf(fq,"%f",  &Variable[i]);
+                // printf("%s %f\n", CropParam[i], Variable[i]);
                 count++;
                 break;
             }
