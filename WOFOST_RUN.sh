@@ -18,7 +18,7 @@ module load netcdf
 # echo "Current directory: $(pwd)"
 
 # Maize Maximum CycleLength = 150
-# ./wofost-Ave-Yp list_Rhine_maize_Yp.txt meteolist_WFDE5_Rhine_maize.txt 
+./wofost-Ave-Yp list_Rhine_maize_Yp.txt meteolist_WFDE5_Rhine_maize.txt 
 # ./wofost-Ave-Yp list_Indus_maize_Yp.txt meteolist_WFDE5_Indus_maize.txt 
 # ./wofost-Ave-Yp list_LaPlata_maize_Yp.txt meteolist_WFDE5_LaPlata_maize.txt 
 # ./wofost-Ave-Yp list_Yangtze_maize_Yp.txt meteolist_WFDE5_Yangtze_maize.txt 
